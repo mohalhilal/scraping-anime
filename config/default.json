@@ -5,6 +5,7 @@
     "GenreList": "genre-list/",
     "Genres": "genres/",
     "Anime": "anime/",
-    "Complete": "complete-anime/"
+    "Complete": "complete-anime/",
+    "Episode": "episode/"
   }
 }

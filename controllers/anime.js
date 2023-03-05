@@ -367,3 +367,44 @@ exports.anime_detail = async (req, res) => {
 
   res.json(JsonRes);
 };
+
+exports.episode = async (req, res) => {
+  const url = BaseUrl + config.get("ChildUrl.Episode") + req.params.id;
+  const response = await axios.get(url);
+
+  const $ = cheerio.load(response.data);
+
+  const link_streaming = $(
+    ".wowmaskot > #venkonten > .venser > .venutama > #lightsVideo > #embed_holder > #pembed > .responsive-embed-stream iframe"
+  ).attr("src");
+
+  const title = $(
+    ".wowmaskot > #venkonten > .venser > .venutama > .posttl"
+  ).text();
+
+  let prev_episode = $(
+    ".wowmaskot > #venkonten > .venser > .venutama > .prevnext > .flir  > a"
+  )
+    .filter("[title='Episode Sebelumnya']")
+    .attr("href");
+
+  let next_episode = $(
+    ".wowmaskot > #venkonten > .venser > .venutama > .prevnext > .flir  > a"
+  )
+    .filter("[title='Episode Selanjutnya']")
+    .attr("href");
+
+  if (prev_episode == undefined) {
+    prev_episode = null;
+    next_episode = next_episode.substring(BaseUrlLength + 8).replace("/", "");
+  } else if (next_episode == undefined) {
+    next_episode = null;
+    prev_episode = prev_episode.substring(BaseUrlLength + 8).replace("/", "");
+  } else if (prev_episode == undefined && next_episode == undefined) {
+    prev_episode = null;
+    next_episode = null;
+  } else {
+    prev_episode = prev_episode.substring(BaseUrlLength + 8).replace("/", "");
+    next_episode = next_episode.substring(BaseUrlLength + 8).replace("/", "");
+  }
+};
