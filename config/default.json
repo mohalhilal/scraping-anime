@@ -1,0 +1,10 @@
+{
+  "BaseUrl": "https://otakudesu.ltd/",
+  "ChildUrl": {
+    "Ongoing": "ongoing-anime/",
+    "GenreList": "genre-list/",
+    "Genres": "genres/",
+    "Anime": "anime/",
+    "Complete": "complete-anime/"
+  }
+}
