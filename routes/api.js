@@ -10,6 +10,7 @@ router.get("/complete/:page", anime.complete_anime);
 router.get("/genre", anime.genre_list);
 router.get("/genre/:id", anime.genre_detail);
 router.get("/genre/:id/:page", anime.genre_detail);
-router.get();
+router.get("/anime/:id", anime.anime_detail);
+router.get("/episode/:id");
 
 module.exports = router;

@@ -283,3 +283,87 @@ exports.genre_detail = async (req, res) => {
     res.send(error);
   }
 };
+
+exports.anime_detail = async (req, res) => {
+  const url = BaseUrl + config.get("ChildUrl.Anime") + req.params.id;
+  const response = await axios.get(url);
+
+  const $ = cheerio.load(response.data);
+
+  const data_eps = [];
+  const data_genre = [];
+  const JsonRes = [];
+
+  $(".wowmaskot > #venkonten > .venser > .episodelist")
+    .eq(1)
+    .find("ul > li")
+    .each((index, element) => {
+      const data = {
+        title: $(element).find("span > a").text(),
+        id: $(element)
+          .find("span > a")
+          .attr("href")
+          .substring(BaseUrlLength + 8)
+          .replace("/", ""),
+        date: $(element).find("span").eq(1).text(),
+      };
+
+      data_eps.push(data);
+    });
+
+  $(
+    ".wowmaskot > #venkonten > .venser > .fotoanime > .infozin > .infozingle > p > span"
+  )
+    .eq(10)
+    .find("a")
+    .each((index, element) => {
+      const data = {
+        genre_link: $(element)
+          .attr("href")
+          .substring(BaseUrlLength + 7)
+          .replace("/", ""),
+        genre_name: $(element).text(),
+      };
+      data_genre.push(data);
+    });
+
+  const thumb = $(".wowmaskot > #venkonten > .venser > .fotoanime > img").attr(
+    "src"
+  );
+  const title = $(
+    ".wowmaskot > #venkonten > .venser > .fotoanime > .infozin > .infozingle > p > span"
+  )
+    .eq(0)
+    .text()
+    .substring(7);
+
+  const status = $(
+    ".wowmaskot > #venkonten > .venser > .fotoanime > .infozin > .infozingle > p > span"
+  )
+    .eq(5)
+    .text()
+    .substring(8);
+
+  const episode = $(
+    ".wowmaskot > #venkonten > .venser > .fotoanime > .infozin > .infozingle > p > span"
+  )
+    .eq(6)
+    .text()
+    .substring(14);
+
+  const synopsis = $(
+    ".wowmaskot > #venkonten > .venser > .fotoanime > .sinopc > p"
+  ).text();
+
+  JsonRes.push({
+    title: title,
+    thumb: thumb,
+    synopsis: synopsis,
+    status: status,
+    total_episode: episode,
+    genre: data_genre,
+    list_episode: data_eps.reverse(),
+  });
+
+  res.json(JsonRes);
+};

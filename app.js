@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const port = 3000;
 const Apirouter = require("./routes/api");
 
 app.use("/api", Apirouter);
 
 app.use("/", function (req, res) {
-  res.send("Selamat Datang");
+  res.sendFile(path.join(__dirname, "/view/index.html"));
 });
 
 app.listen(port, () => {
