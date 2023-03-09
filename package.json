@@ -2,7 +2,7 @@
   "name": "anime-scrape",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "api.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
