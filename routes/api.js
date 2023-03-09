@@ -12,5 +12,6 @@ router.get("/genre/:id", anime.genre_detail);
 router.get("/genre/:id/:page", anime.genre_detail);
 router.get("/anime/:id", anime.anime_detail);
 router.get("/episode/:id", anime.episode);
+router.get("/mirror/:content", anime.mirror_content);
 
 module.exports = router;

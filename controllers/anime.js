@@ -372,7 +372,51 @@ exports.episode = async (req, res) => {
   const url = BaseUrl + config.get("ChildUrl.Episode") + req.params.id;
   const response = await axios.get(url);
 
+  let UrlNow = req.protocol + "://" + req.get("host") + "/api/mirror/";
+
   const $ = cheerio.load(response.data);
+
+  const anime = [];
+  const mirror_list = [];
+  const p360 = [];
+  const p480 = [];
+  const p720 = [];
+
+  $(
+    ".wowmaskot > #venkonten > .venser > .venutama > #lightsVideo > #embed_holder > .mirrorstream"
+  )
+    .find(".m360p > li")
+    .each((index, element) => {
+      const data = {
+        host: $(element).text(),
+        link: UrlNow + $(element).find("a").attr("data-content"),
+      };
+      p360.push(data);
+    });
+
+  $(
+    ".wowmaskot > #venkonten > .venser > .venutama > #lightsVideo > #embed_holder > .mirrorstream"
+  )
+    .find(".m480p > li")
+    .each((index, element) => {
+      const data = {
+        host: $(element).text(),
+        link: UrlNow + $(element).find("a").attr("data-content"),
+      };
+      p480.push(data);
+    });
+
+  $(
+    ".wowmaskot > #venkonten > .venser > .venutama > #lightsVideo > #embed_holder > .mirrorstream"
+  )
+    .find(".m720p > li")
+    .each((index, element) => {
+      const data = {
+        host: $(element).text(),
+        link: UrlNow + $(element).find("a").attr("data-content"),
+      };
+      p720.push(data);
+    });
 
   const link_streaming = $(
     ".wowmaskot > #venkonten > .venser > .venutama > #lightsVideo > #embed_holder > #pembed > .responsive-embed-stream iframe"
@@ -407,4 +451,52 @@ exports.episode = async (req, res) => {
     prev_episode = prev_episode.substring(BaseUrlLength + 8).replace("/", "");
     next_episode = next_episode.substring(BaseUrlLength + 8).replace("/", "");
   }
+
+  mirror_list.push({
+    "360p": p360,
+    "480p": p480,
+    "720p": p720,
+  });
+
+  anime.push({
+    title: title,
+    link_streaming: link_streaming,
+    prev_episode: prev_episode,
+    next_episode: next_episode,
+    mirror_list: mirror_list,
+  });
+
+  res.json(anime);
+};
+
+exports.mirror_content = async (req, res) => {
+  const content = req.params.content;
+  let decrypt = JSON.parse(atob(content));
+
+  const response = await axios.post(
+    "https://otakudesu.ltd/wp-admin/admin-ajax.php",
+    {
+      ...decrypt,
+      nonce: "191e7bcf7f",
+      action: "2a3505c93b0035d3f455df82bf976b84",
+    },
+    {
+      headers: {
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        origin: "https://otakudesu.ltd",
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.63",
+      },
+    }
+  );
+
+  const $ = cheerio.load(atob(response.data.data));
+
+  const link = $(".responsive-embed-stream > iframe").attr("src");
+
+  const data = {
+    link_mirror: link,
+  };
+
+  res.json(data);
 };
