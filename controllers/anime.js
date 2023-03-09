@@ -247,7 +247,7 @@ exports.genre_detail = async (req, res) => {
       jsonRes.push({
         TotalPage: TotalPage,
         nextPage: nextPage
-          .substring(BaseUrlLength + 16)
+          .substring(BaseUrlLength + 18)
           .replace("/", "")
           .slice(0, -1),
         data: anime,
@@ -256,7 +256,7 @@ exports.genre_detail = async (req, res) => {
       jsonRes.push({
         TotalPage: TotalPage,
         prevPage: prevPage
-          .substring(BaseUrlLength + 16)
+          .substring(BaseUrlLength + 18)
           .replace("/", "")
           .slice(0, -1),
         data: anime,
@@ -267,11 +267,11 @@ exports.genre_detail = async (req, res) => {
       jsonRes.push({
         TotalPage: TotalPage,
         prevPage: prevPage
-          .substring(BaseUrlLength + 16)
+          .substring(BaseUrlLength + 18)
           .replace("/", "")
           .slice(0, -1),
         nextPage: nextPage
-          .substring(BaseUrlLength + 16)
+          .substring(BaseUrlLength + 18)
           .replace("/", "")
           .slice(0, -1),
         data: anime,
