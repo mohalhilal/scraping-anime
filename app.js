@@ -7,7 +7,7 @@ const Apirouter = require("./routes/api");
 app.use("/api", Apirouter);
 
 app.use("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "/view/index.html"));
+  res.send("Created By : https://github.com/mohalhilal" + " ❤");
 });
 
 app.listen(port, () => {
