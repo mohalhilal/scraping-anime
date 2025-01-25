@@ -474,16 +474,16 @@ exports.mirror_content = async (req, res) => {
   let decrypt = JSON.parse(atob(content));
 
   const response = await axios.post(
-    "https://otakudesu.wiki/wp-admin/admin-ajax.php",
+    "https://otakudesu.cloud/wp-admin/admin-ajax.php",
     {
       ...decrypt,
-      nonce: "989c7dad77",
+      nonce: "0329ffb459",
       action: "2a3505c93b0035d3f455df82bf976b84",
     },
     {
       headers: {
         "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        origin: "https://otakudesu.wiki",
+        origin: "https://otakudesu.cloud",
         "user-agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.63",
       },
