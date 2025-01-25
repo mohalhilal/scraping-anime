@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const port = 3000;
 const Apirouter = require("./routes/api");
+var cors = require('cors');
+app.use(cors())
 
 // Middleware untuk menyajikan file statis
 app.use(express.static(path.join(__dirname, 'public')));
