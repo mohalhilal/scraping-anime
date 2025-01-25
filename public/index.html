@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Endpoint List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #e0e5ec;
+        }
+        .neumorphism {
+            background: #e0e5ec;
+            box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center font-sans">
+
+    <div class="max-w-4xl w-full p-6 neumorphism rounded-2xl">
+        <h1 class="text-3xl font-bold text-gray-700 text-center mb-8">📄 API Endpoint List</h1>
+
+        <div class="space-y-4">
+            <!-- Ongoing -->
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /ongoing</h2>
+                <p class="text-sm text-gray-500">Retrieve a list of ongoing anime.</p>
+            </div>
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /ongoing/:page</h2>
+                <p class="text-sm text-gray-500">Retrieve ongoing anime with pagination.</p>
+            </div>
+
+            <!-- Complete -->
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /complete</h2>
+                <p class="text-sm text-gray-500">Retrieve a list of completed anime.</p>
+            </div>
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /complete/:page</h2>
+                <p class="text-sm text-gray-500">Retrieve completed anime with pagination.</p>
+            </div>
+
+            <!-- Genre -->
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /genre</h2>
+                <p class="text-sm text-gray-500">Retrieve a list of genres.</p>
+            </div>
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /genre/:id</h2>
+                <p class="text-sm text-gray-500">Retrieve anime list for a specific genre.</p>
+            </div>
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /genre/:id/:page</h2>
+                <p class="text-sm text-gray-500">Retrieve genre-specific anime with pagination.</p>
+            </div>
+
+            <!-- Anime -->
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /anime/:id</h2>
+                <p class="text-sm text-gray-500">Retrieve detailed information about a specific anime.</p>
+            </div>
+
+            <!-- Episode -->
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /episode/:id</h2>
+                <p class="text-sm text-gray-500">Retrieve episode details for a specific anime.</p>
+            </div>
+
+            <!-- Mirror -->
+            <div class="neumorphism p-4 rounded-lg">
+                <h2 class="text-lg font-semibold text-gray-600">GET /mirror/:content</h2>
+                <p class="text-sm text-gray-500">Retrieve mirror content for an episode.</p>
+            </div>
+        </div>
+
+        <footer class="text-center mt-8 text-gray-500 text-sm">
+            Powered by Express.js 🚀
+        </footer>
+    </div>
+
+</body>
+</html>
